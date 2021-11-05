@@ -1,5 +1,69 @@
+import { useEffect, useState } from 'react';
+
+import { Board } from './components/Board';
+
+export type CardType = {
+  id: number,
+  color: string,
+  flipped?: boolean
+}
+
+const data: CardType[] = [
+  { id: 1, color: '#a90909'},
+  { id: 2, color: '#66972e'},
+  { id: 3, color: '#18e1b2'},
+  { id: 4, color: '#e118b1'},
+  { id: 5, color: '#ff7e00'},
+  { id: 6, color: '#0300c3'},
+  { id: 7, color: '#c3b900'},
+  { id: 8, color: '#aa00ff'},
+  { id: 9, color: '#0081ff'},
+  { id: 10, color: '#f8a088'}
+]
+
+const getData = (): CardType[] => data;
+
+const shuffle = (arr: any[]): any[] => {
+  return arr.sort(() => Math.random() - 0.5);
+}
 
 export const App: React.FC = () => {
-  return (<h1>Hello World!</h1>);
+  const [cards, setCards] = useState(shuffle([...getData(), ...getData()]))
+  const [flippedCards, setFlippedCards] = useState<CardType[]>([]);
+
+  useEffect(() => {
+    if (flippedCards.length === 2) {
+      compareFlippedCards();
+      setFlippedCards([]); // reset the flipped cards
+    }
+  }, [flippedCards]); // eslint-disable-line
+
+  /**
+   * Check if the cards stored in the flipped array are equal
+   * If the cards are equal, set the flipped property to true
+   */
+  const compareFlippedCards = (): void => {
+    if (flippedCards[0].id === flippedCards[1].id) {
+      setCards(cards.reduce((ack, c) => {
+        ack.push(c.id === flippedCards[0].id ? {...c, flipped: true} : c);
+        return ack;
+      }, []));
+    }
+  }
+
+  /**
+   * Add a card to the flippedCards array
+   */
+  const flipCard = (card: CardType): void => {
+    setFlippedCards([...flippedCards, card]);
+  }
+
+  return (
+    <Board
+      cards={cards}
+      flippedCards={flippedCards}
+      flipCard={flipCard}
+    />
+  );
 }
 
