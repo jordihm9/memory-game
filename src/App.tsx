@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+
+import { useStopWatch } from './hooks/useStopWatch';
 
 import { Board } from './components/Board';
+import { Timer } from './components/Timer';
 
 export type CardType = {
   id: number,
@@ -30,6 +33,7 @@ const shuffle = (arr: any[]): any[] => {
 export const App: React.FC = () => {
   const [cards, setCards] = useState(shuffle([...getData(), ...getData()]))
   const [flippedCards, setFlippedCards] = useState<CardType[]>([]);
+  const stopwatch = useStopWatch();
 
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -59,11 +63,16 @@ export const App: React.FC = () => {
   }
 
   return (
-    <Board
-      cards={cards}
-      flippedCards={flippedCards}
-      flipCard={flipCard}
-    />
+    <Fragment>
+      <Timer time={stopwatch.time}/>
+      <button onClick={() => stopwatch.start()}>Start</button>
+      <button onClick={() => stopwatch.stop()}>Stop</button>
+      <Board
+        cards={cards}
+        flippedCards={flippedCards}
+        flipCard={flipCard}
+      />
+    </Fragment>
   );
 }
 
