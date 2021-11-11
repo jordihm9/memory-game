@@ -26,11 +26,16 @@ export const useStopWatch = () => {
     }
   }
 
+  const reset = (): void => {
+    setTime(0);
+  }
+
   return {
     status,
     time,
     start,
-    stop
+    stop,
+    reset
   };
 }
 

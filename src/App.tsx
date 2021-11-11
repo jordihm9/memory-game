@@ -54,20 +54,41 @@ export const App: React.FC = () => {
   }, [flippedCards]); // eslint-disable-line
 
   useEffect(() => {
-      if (finished()) {
-        console.log('Ended!');
-        finish();
-      }
+    if (finished()) {
+      finish();
+    }
   }, [cards]); // eslint-disable-line
 
-  const play = () => {
+  /**
+   * Change the status to running and start the timer
+   */
+  const play = (): void => {
     setStatus(Status.Running);
     stopwatch.start();
   }
 
-  const finish = () => {
+  /**
+   * Reset the cards array, reset the timer and play
+   */
+  const playAgain = (): void => {
+    reset();
+    stopwatch.reset();
+    play();
+  }
+
+  /**
+   * Change the status to finish and stop the timer
+   */
+  const finish = (): void => {
     setStatus(Status.Finished);
     stopwatch.stop();
+  }
+
+  /**
+   * Reset the cards array
+   */
+  const reset = (): void => {
+    setCards(shuffle([...getData(), ...getData()]));
   }
 
   /**
@@ -109,7 +130,10 @@ export const App: React.FC = () => {
             />
           </Game>
         : status === Status.Finished ?
-          <Timer time={stopwatch.time} />
+          <Fragment>
+            <Timer time={stopwatch.time} />
+            <Button onClick={playAgain}>Play</Button>
+          </Fragment>
         : null
       }
     </Fragment>
