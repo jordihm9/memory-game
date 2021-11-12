@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { CardType } from './../App';
+import { Card } from './../services/Cards';
 
 import { CardsGrid } from './CardsGrid';
 import { Timer } from './Timer';
 
 interface Props {
-  cards: CardType[],
-  setCards: React.Dispatch<React.SetStateAction<CardType[]>>,
+  cards: Card[],
+  setCards: React.Dispatch<React.SetStateAction<Card[]>>,
   time: number
 }
 
 const Container = styled.div``;
 
 export const Game: React.FC<Props> = ({cards, setCards, time}) => {
-  const [flippedCards, setFlippedCards] = useState<CardType[]>([]);
+  const [flippedCards, setFlippedCards] = useState<Card[]>([]);
 
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -30,7 +30,7 @@ export const Game: React.FC<Props> = ({cards, setCards, time}) => {
    */
   const compareFlippedCards = (): void => {
     if (flippedCards[0].id === flippedCards[1].id) {
-      setCards(cards.reduce((ack: CardType[], c) => {
+      setCards(cards.reduce((ack: Card[], c) => {
         ack.push(c.id === flippedCards[0].id ? {...c, flipped: true} : c);
         return ack;
       }, []));
@@ -40,7 +40,7 @@ export const Game: React.FC<Props> = ({cards, setCards, time}) => {
   /**
    * Add a card to the flippedCards array
    */
-  const flipCard = (card: CardType): void => {
+  const flipCard = (card: Card): void => {
     setFlippedCards([...flippedCards, card]);
   }
 

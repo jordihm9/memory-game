@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { CardType } from './../App';
+import { Card as CardType } from './../services/Cards';
+
 import { Card } from './Card';
 
 interface Props {

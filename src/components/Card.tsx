@@ -1,6 +1,7 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CardType } from './../App';
+
+import { Card as CardType } from './../services/Cards';
 
 interface Props {
   card: CardType,

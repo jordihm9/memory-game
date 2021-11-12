@@ -2,6 +2,8 @@ import { Fragment, useEffect, useState } from 'react';
 
 import { useStopWatch } from './hooks/useStopWatch';
 
+import { getCards, Card } from './services/Cards';
+
 import { Game } from './components/Game';
 import { Button } from './components/Button';
 import { Timer } from './components/Timer';
@@ -12,34 +14,9 @@ enum Status {
   Finished = 'c'
 }
 
-export type CardType = {
-  id: number,
-  color: string,
-  flipped?: boolean
-}
-
-const data: CardType[] = [
-  { id: 1, color: '#a90909'},
-  { id: 2, color: '#66972e'},
-  { id: 3, color: '#18e1b2'},
-  { id: 4, color: '#e118b1'},
-  { id: 5, color: '#ff7e00'},
-  { id: 6, color: '#0300c3'},
-  { id: 7, color: '#c3b900'},
-  { id: 8, color: '#aa00ff'},
-  { id: 9, color: '#0081ff'},
-  { id: 10, color: '#f8a088'}
-]
-
-const getData = (): CardType[] => data;
-
-const shuffle = (arr: any[]): any[] => {
-  return arr.sort(() => Math.random() - 0.5);
-}
-
 export const App: React.FC = () => {
   const [status, setStatus] = useState(Status.Null);
-  const [cards, setCards] = useState<CardType[]>(shuffle([...getData(), ...getData()]))
+  const [cards, setCards] = useState<Card[]>(getCards());
   const stopwatch = useStopWatch();
 
   useEffect(() => {
@@ -77,7 +54,7 @@ export const App: React.FC = () => {
    * Reset the cards array
    */
   const reset = (): void => {
-    setCards(shuffle([...getData(), ...getData()]));
+    setCards(getCards());
   }
 
   /**
