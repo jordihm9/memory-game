@@ -21,7 +21,7 @@ const Grid = styled.div<GridProps>`
   grid-template-columns: repeat(${({columns}) => columns}, 1fr);
 `;
 
-export const Board: React.FC<Props> = ({ cards, flippedCards, flipCard }) => {
+export const CardsGrid: React.FC<Props> = ({ cards, flippedCards, flipCard }) => {
   return (
     <Grid columns={Math.floor(Math.sqrt(cards.length))}>
       { cards.map((c, i)=> (
