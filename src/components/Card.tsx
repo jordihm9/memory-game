@@ -35,7 +35,7 @@ export const Card: React.FC<Props> = ({card, flippedCards, flipCard}) => {
   })
   
   const handleClick = () => {
-    if (!card.flipped) {
+    if (!card.flipped && !flipped) {
       flip();
       flipCard(card);
     }
