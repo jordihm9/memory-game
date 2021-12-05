@@ -4,9 +4,12 @@ import { useStopWatch } from './hooks/useStopWatch';
 
 import { getCards, Card } from './services/Cards';
 
-import { Game } from './components/Game';
 import { Button } from './components/Button';
+import { Container } from './components/Container';
+import { Game } from './components/Game';
+import { Message } from './components/Message';
 import { Timer } from './components/Timer';
+import { Title } from './components/Title';
 
 enum Status {
   Null = 'a',
@@ -63,7 +66,8 @@ export const App: React.FC = () => {
   const finished = (): boolean => cards.every(c => c.flipped);
 
   return (
-    <Fragment>
+    <Container>
+      <Title>Memory Game</Title>
       { status === Status.Null ?
           <Button onClick={play}>Start</Button>
         : status === Status.Running ?
@@ -74,12 +78,13 @@ export const App: React.FC = () => {
           />
         : status === Status.Finished ?
           <Fragment>
-            <Timer time={stopwatch.time} />
-            <Button onClick={playAgain}>Play</Button>
+            <Message>Great! You finished in:</Message>
+            <Timer blink time={stopwatch.time} />
+            <Button onClick={playAgain}>Play again</Button>
           </Fragment>
         : null
       }
-    </Fragment>
+    </Container>
   );
 }
 

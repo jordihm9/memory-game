@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { Fragment, useEffect, useState } from 'react';
 
 import { Card } from './../services/Cards';
 
@@ -11,8 +10,6 @@ interface Props {
   setCards: React.Dispatch<React.SetStateAction<Card[]>>,
   time: number
 }
-
-const Container = styled.div``;
 
 export const Game: React.FC<Props> = ({cards, setCards, time}) => {
   const [flippedCards, setFlippedCards] = useState<Card[]>([]);
@@ -45,14 +42,14 @@ export const Game: React.FC<Props> = ({cards, setCards, time}) => {
   }
 
   return (
-    <Container>
+    <Fragment>
       <Timer time={time}/>
       <CardsGrid
         cards={cards}
         flippedCards={flippedCards}
         flipCard={flipCard}
       />
-    </Container>
+    </Fragment>
   );
 }
 

@@ -9,15 +9,17 @@ interface Props {
   flipCard: (card: CardType) => void
 }
 
-interface ColoredDivProps {
+interface StyledCardProps {
   color: string,
   flipped?: boolean
 }
 
-const ColoredDiv = styled.div<ColoredDivProps>`
+const StyledCard = styled.div<StyledCardProps>`
   width: 100px;
   height: 100px;
-  background-color: ${({color, flipped}) => flipped ? color : '#000'};
+  border-radius: 0.5rem;
+  background-color: ${({color, flipped}) => flipped ? color : '#292929'};
+  box-shadow: 0 0 0.5rem #292929;
   cursor: pointer;
 `;
 
@@ -50,7 +52,7 @@ export const Card: React.FC<Props> = ({card, flippedCards, flipCard}) => {
 
   return (
     <div className="card" onClick={handleClick}>
-      <ColoredDiv
+      <StyledCard
         color={card.color}
         flipped={card.flipped || flipped}
       />

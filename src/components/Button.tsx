@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
-interface Props {
-  children: React.ReactNode,
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
-}
-
-const StyledButton = styled.button`
-  display: inline-block;
+export const Button = styled.button`
+  display: block;
+  margin: auto;
   padding: 0.5em 1em;
   outline: none;
-  border: 1px solid #000;
+  border: none;
+  border-radius: 1.25rem;
+  font-size: 1.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #fff;
+  background: #292929;
+  cursor: pointer;
 `;
-
-export const Button: React.FC<Props> = ({children, ...props}) => {
-  return <StyledButton {...props}>{children}</StyledButton>
-}
 
