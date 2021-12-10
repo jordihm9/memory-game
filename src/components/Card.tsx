@@ -15,12 +15,17 @@ interface StyledCardProps {
 }
 
 const StyledCard = styled.div<StyledCardProps>`
-  width: 100px;
-  height: 100px;
+  --size: 75px;
+  width: var(--size);
+  height: var(--size);
   border-radius: 0.5rem;
   background-color: ${({color, flipped}) => flipped ? color : '#292929'};
   box-shadow: 0 0 0.5rem #292929;
   cursor: pointer;
+
+  @media screen and (min-width: 600px) {
+    --size: 100px;
+  }
 `;
 
 export const Card: React.FC<Props> = ({card, flippedCards, flipCard}) => {
@@ -51,12 +56,11 @@ export const Card: React.FC<Props> = ({card, flippedCards, flipCard}) => {
   }
 
   return (
-    <div className="card" onClick={handleClick}>
-      <StyledCard
-        color={card.color}
-        flipped={card.flipped || flipped}
-      />
-    </div>
+    <StyledCard
+      color={card.color}
+      flipped={card.flipped || flipped}
+      onClick={handleClick}
+    />
   );
 }
 
