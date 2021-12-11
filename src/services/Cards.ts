@@ -7,17 +7,15 @@ export type Card = {
 }
 
 const cards: Card[] = [
-  { id: 1, color: '#a90909'},
-  { id: 2, color: '#66972e'},
-  { id: 3, color: '#18e1b2'},
-  { id: 4, color: '#e118b1'},
-  { id: 5, color: '#ff7e00'},
-  { id: 6, color: '#0300c3'},
-  { id: 7, color: '#c3b900'},
-  { id: 8, color: '#aa00ff'},
-  { id: 9, color: '#0081ff'},
-  { id: 10, color: '#f8a088'}
-]
+  {id: 1, color: '#ff0000'}, // red
+  {id: 2, color: '#00ff00'}, // green
+  {id: 3, color: '#0000ff'}, // blue
+  {id: 4, color: '#ffff00'}, // yellow
+  {id: 5, color: '#ff00ff'}, // pink
+  {id: 6, color: '#00ffff'}, // light blue (cian)
+  {id: 7, color: '#8c00ff'}, // purple
+  {id: 8, color: '#ff7700'}, // orange
+];
 
 export const getCards = (): Card[] => {
   return shuffle([...cards, ...cards]);
