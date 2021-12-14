@@ -6,20 +6,53 @@ export type Card = {
   flipped?: boolean
 }
 
-const cards: Card[] = [
-  { id: 1, color: '#a90909'},
-  { id: 2, color: '#66972e'},
-  { id: 3, color: '#18e1b2'},
-  { id: 4, color: '#e118b1'},
-  { id: 5, color: '#ff7e00'},
-  { id: 6, color: '#0300c3'},
-  { id: 7, color: '#c3b900'},
-  { id: 8, color: '#aa00ff'},
-  { id: 9, color: '#0081ff'},
-  { id: 10, color: '#f8a088'}
+export enum Level {
+  Easy = 'easy',
+  Normal = 'normal',
+  Hard = 'Hard'
+}
+
+const easyCardsLevel: Card[] = [
+  {id: 1, color: '#ff0000'}, // red
+  {id: 2, color: '#00ff00'}, // green
+  {id: 3, color: '#0000ff'}, // blue
+  {id: 4, color: '#ffff00'}, // yellow
+  {id: 5, color: '#ff00ff'}, // pink
+  {id: 6, color: '#ff7700'}, // orange
 ]
 
-export const getCards = (): Card[] => {
+const normalCardsLevel: Card[] = [
+  ...easyCardsLevel,
+  {id: 7, color: '#8c00ff'}, // purple
+  {id: 8, color: '#00ffff'}, // light blue (cian)
+  {id: 9, color: '#226500'}, // dark green
+  {id: 10, color: '#655400'}, // brown
+]
+
+const hardCardsLevel: Card[] = [
+  ...normalCardsLevel,
+  {id: 11, color: '#700054'}, // dark purple/pink
+  {id: 12, color: '#c38fff'}, // light purple (violet)
+  {id: 13, color: '#f9706f'}, // light red (salmon)
+  {id: 14, color: '#6ff988'}, // light green (lime)
+  {id: 15, color: '#6f7df9'}, // light electric blue
+]
+
+export const getCards = (level: Level): Card[] => {
+  let cards: Card[] = [];
+
+  switch (level) {
+    case Level.Easy:
+      cards = easyCardsLevel;
+      break;
+    case Level.Normal:
+      cards = normalCardsLevel;
+      break;
+    case Level.Hard:
+      cards = hardCardsLevel;
+      break;
+  }
+
   return shuffle([...cards, ...cards]);
 }
 
