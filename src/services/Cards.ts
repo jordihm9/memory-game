@@ -9,7 +9,7 @@ export type Card = {
 export enum Level {
   Easy = 'easy',
   Normal = 'normal',
-  Difficult = 'difficult'
+  Hard = 'Hard'
 }
 
 const easyCardsLevel: Card[] = [
@@ -29,7 +29,7 @@ const normalCardsLevel: Card[] = [
   {id: 10, color: '#655400'}, // brown
 ]
 
-const difficultCardsLevel: Card[] = [
+const hardCardsLevel: Card[] = [
   ...normalCardsLevel,
   {id: 11, color: '#700054'}, // dark purple/pink
   {id: 12, color: '#c38fff'}, // light purple (violet)
@@ -38,7 +38,7 @@ const difficultCardsLevel: Card[] = [
   {id: 15, color: '#6f7df9'}, // light electric blue
 ]
 
-export const getCards = (level: Level = Level.Difficult): Card[] => {
+export const getCards = (level: Level): Card[] => {
   let cards: Card[] = [];
 
   switch (level) {
@@ -48,8 +48,8 @@ export const getCards = (level: Level = Level.Difficult): Card[] => {
     case Level.Normal:
       cards = normalCardsLevel;
       break;
-    case Level.Difficult:
-      cards = difficultCardsLevel;
+    case Level.Hard:
+      cards = hardCardsLevel;
       break;
   }
 
